@@ -1,0 +1,11 @@
+# Ignore directories that slow down deployments
+.git
+.gitignore
+README.md
+.env
+.env.local
+node_modules
+dist
+references/
+vendor/
+public/official-dbot/

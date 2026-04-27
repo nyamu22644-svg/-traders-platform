@@ -1,7 +1,7 @@
 {
-  "name": "react-example",
+  "name": "tradesaas",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "\"%npm_node_execpath%\" node_modules\\vite\\bin\\vite.js --port=3000 --host=0.0.0.0",
@@ -10,7 +10,7 @@
     "sync:official-dbot": "\"%npm_node_execpath%\" scripts/sync-official-dbot.mjs",
     "build": "\"%npm_node_execpath%\" node_modules\\vite\\bin\\vite.js build",
     "preview": "\"%npm_node_execpath%\" node_modules\\vite\\bin\\vite.js preview",
-    "clean": "rm -rf dist",
+    "clean": "node -e \"require('fs').rmSync('dist', {recursive: true, force: true})\"",
     "lint": "\"%npm_node_execpath%\" node_modules\\typescript\\bin\\tsc --noEmit"
   },
   "dependencies": {
