@@ -4,14 +4,14 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "\"%npm_node_execpath%\" node_modules\\vite\\bin\\vite.js --port=3000 --host=0.0.0.0",
-    "dev:api": "\"%npm_node_execpath%\" scripts/local-dev-server.js",
-    "dev:full": "\"%npm_node_execpath%\" scripts/dev-full.js",
-    "sync:official-dbot": "\"%npm_node_execpath%\" scripts/sync-official-dbot.mjs",
-    "build": "\"%npm_node_execpath%\" node_modules\\vite\\bin\\vite.js build",
-    "preview": "\"%npm_node_execpath%\" node_modules\\vite\\bin\\vite.js preview",
+    "dev": "vite --port=3000 --host=0.0.0.0",
+    "dev:api": "node scripts/local-dev-server.js",
+    "dev:full": "node scripts/dev-full.js",
+    "sync:official-dbot": "node scripts/sync-official-dbot.mjs",
+    "build": "vite build",
+    "preview": "vite preview",
     "clean": "node -e \"require('fs').rmSync('dist', {recursive: true, force: true})\"",
-    "lint": "\"%npm_node_execpath%\" node_modules\\typescript\\bin\\tsc --noEmit"
+    "lint": "tsc --noEmit"
   },
   "dependencies": {
     "@deriv-com/quill-ui-next": "^2.4.5",
