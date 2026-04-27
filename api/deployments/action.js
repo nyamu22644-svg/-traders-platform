@@ -76,6 +76,14 @@ export default async function handler(req, res) {
       return res.status(403).json({ error: 'You do not own this site.' });
     }
 
+    // Automatically make the site public when deploying
+    const { error: publishError } = await adminClient
+      .from('sites')
+      .update({ is_public: true })
+      .eq('id', siteId);
+
+    if (publishError) throw publishError;
+
     const { data: existingDeployment, error: existingError } = await adminClient
       .from('site_deployments')
       .select('*')
