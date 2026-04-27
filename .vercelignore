@@ -9,3 +9,10 @@ dist
 references/
 vendor/
 public/official-dbot/
+
+# Exclude mock payment functions (test only, not production)
+api/payments/mock/
+
+# Exclude optional domain check functions (fallback to provider APIs)
+api/namecheap/
+api/porkbun/suggestions.js
