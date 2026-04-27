@@ -23,6 +23,7 @@ export interface UserProfile {
   id: string;
   email: string;
   role: UserRole;
+  deriv_loginid: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -38,11 +39,94 @@ export interface Site {
   updated_at: string;
 }
 
+export interface SiteDeployment {
+  id: string;
+  site_id: string;
+  user_id: string;
+  deployment_slug: string;
+  deployment_url: string;
+  status: 'draft' | 'building' | 'active' | 'failed';
+  provider: 'vercel' | string;
+  environment: 'production' | 'preview' | 'development' | string;
+  last_deployed_at: string;
+  last_error: string | null;
+  metadata: any;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Domain {
   id: string;
   site_id: string;
   domain: string;
   verified: boolean;
+  provider: 'manual' | 'namecheap' | 'namecheap_affiliate' | 'porkbun' | 'platform_subdomain';
+  status: 'draft' | 'pending_verification' | 'active' | 'purchase_pending' | 'failed';
+  verification_token: string | null;
+  verification_record_type: 'TXT' | 'CNAME' | 'A' | null;
+  verification_record_name: string | null;
+  verification_record_value: string | null;
+  dns_record_type: 'A' | 'CNAME' | null;
+  dns_record_name: string | null;
+  dns_record_value: string | null;
+  last_verified_at: string | null;
+  auto_renew: boolean;
+  purchase_price: number | null;
+  expires_at: string | null;
+  provisioning_error: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface DomainPurchaseRequest {
+  id: string;
+  site_id: string;
+  domain_name: string;
+  provider: 'namecheap' | 'namecheap_affiliate' | 'porkbun';
+  years: number;
+  registrant_email: string;
+  status: 'pending' | 'processing' | 'completed' | 'failed' | 'cancelled';
+  payment_provider: 'mpesa' | 'paystack' | 'flutterwave' | 'manual' | null;
+  payment_reference: string | null;
+  payment_status: 'pending' | 'paid' | 'failed' | 'refunded';
+  order_status:
+    | 'pending_payment'
+    | 'payment_confirmed'
+    | 'registering'
+    | 'dns_configuring'
+    | 'vercel_linking'
+    | 'verifying'
+    | 'completed'
+    | 'failed'
+    | 'refunded';
+  currency: string;
+  payment_amount: number | null;
+  base_cost: number | null;
+  sell_price: number | null;
+  platform_margin: number | null;
+  domain_id: string | null;
+  namecheap_order_id: string | null;
+  vercel_domain_verified: boolean;
+  processed_at: string | null;
+  availability_snapshot: any;
+  invoices: any[];
+  metadata: any;
+  last_error: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface DomainPricingRule {
+  id: string;
+  tld: string;
+  currency: string;
+  base_price: number | null;
+  markup_type: 'flat' | 'percent';
+  markup_value: number;
+  service_fee: number;
+  final_price_override: number | null;
+  is_active: boolean;
+  notes: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -63,6 +147,16 @@ export interface SiteConfig {
   hero_content: any;
   cta_content: any;
   support_social_links: any;
+  total_commission_pct: number;
+  platform_commission_pct: number;
+  client_commission_pct: number;
+  deriv_referral_code: string | null;
+  deriv_utm_source: string | null;
+  deriv_utm_medium: string | null;
+  deriv_utm_campaign: string | null;
+  payout_model: 'platform_collects_and_pays_clients' | 'deriv_direct_split_if_supported';
+  payout_cycle: 'weekly' | 'monthly';
+  payout_minimum: number;
   created_at: string;
   updated_at: string;
 }

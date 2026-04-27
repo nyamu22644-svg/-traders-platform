@@ -33,10 +33,10 @@ export function SignalSite({ site, config }: Props) {
         </nav>
         <div className="flex items-center gap-4">
           <button className="text-sm font-medium text-zinc-300 hover:text-white transition-colors">
-            Log In
+            View Results
           </button>
           <button className="px-4 py-2 rounded-md text-sm font-medium text-white transition-opacity hover:opacity-90" style={{ backgroundColor: primaryColor }}>
-            Join Now
+            Start With Deriv
           </button>
         </div>
       </header>

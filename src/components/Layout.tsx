@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link, Outlet, useLocation, Navigate } from 'react-router-dom';
-import { LayoutDashboard, Globe, Settings, LogOut, Menu } from 'lucide-react';
+import { LayoutDashboard, Globe, Settings, LogOut, Menu, HandCoins, ShieldCheck, Waypoints, Rocket } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { useUserProfile } from '../hooks/useUserProfile';
 import { cn } from '../lib/utils';
 import { Spinner } from './ui/Spinner';
 
 export default function Layout() {
   const { user, loading, signOut } = useAuth();
+  const { profile } = useUserProfile();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
@@ -22,9 +24,14 @@ export default function Layout() {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
+  const isAdmin = profile?.role === 'admin';
+
   const navigation = [
     { name: 'Dashboard', href: '/', icon: LayoutDashboard },
-    { name: 'My Sites', href: '/sites', icon: Globe },
+    ...(isAdmin ? [{ name: 'Owner Admin', href: '/admin', icon: ShieldCheck }] : [{ name: 'My Sites', href: '/sites', icon: Globe }]),
+    { name: 'Deployments', href: '/deployments', icon: Rocket },
+    { name: 'Domains', href: '/domains', icon: Waypoints },
+    { name: 'Commissions', href: '/commissions', icon: HandCoins },
     { name: 'Settings', href: '/settings', icon: Settings },
   ];
 
